@@ -1,0 +1,13 @@
+flair used for NER
+    https://github.com/flairNLP/flair/
+    @inproceedings{akbik2019flair,
+        title={{FLAIR}: An easy-to-use framework for state-of-the-art {NLP}},
+        author={Akbik, Alan and Bergmann, Tanja and Blythe, Duncan and Rasul, Kashif and Schweter, Stefan and Vollgraf, Roland},
+        booktitle={{NAACL} 2019, 2019 Annual Conference of the North American Chapter of the Association for Computational Linguistics (Demonstrations)},
+        pages={54--59},
+        year={2019}
+    }
+
+Riedl&Biemann for SECOS
+
+Projekt Deutscher Wortschatz

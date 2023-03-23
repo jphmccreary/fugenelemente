@@ -1,0 +1,4 @@
+named entities
+numbers
+spaces??
+English

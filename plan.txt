@@ -1,0 +1,21 @@
+~~generate DT for each year using jobimtext~~
+    this will take so much work to figure out - let's start with the DT provided by Riedl&Biemann
+
+generate splits by feeding into SECOS the two required inputs, repeating for each year
+    - the sentences for a year
+    - the dt ~~for a year~~
+
+count the number of splits for each word
+
+extract the compounds (we're considering GCWs to be the words with #splits > 0)
+
+pull out named entities (when to perform this step?)
+
+determine Fugenelement
+
+count em sort em
+
+analyze em
+
+Question: how does using only 1 year of data in the DT (1M words as opposed to SECOS's 70M affect splitting performance metrics?)
+    for now this will go unanswered as I have resigned to using the provided DT
