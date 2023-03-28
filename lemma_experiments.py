@@ -23,7 +23,11 @@ words_to_try = ['Bundes',
                 'Zinssignale',
                 'Zins',
                 'Devisen',
-                'Howaldts']
+                'Howaldts',
+                'machst',
+                'trockener',
+                'trocken',
+                'trockens']
 
 nlp = spacy.load('de_core_news_md')
 

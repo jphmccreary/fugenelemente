@@ -1,30 +1,15 @@
 import spacy
-import pickle
+import dill as pickle
 import datetime
+from unfuge import operations
 
-# (Länger 1998)
-FUGENELEMENTE = {
-    'NULL': '',
-    'ADD_S': 's',
-    'ADD_N': 'n',
-    'ADD_EN': 'en',
-    'ADD_NEN': 'nen',
-    'DEL_US_ADD_EN': 'en',
-    'DEL_UM_ADD_EN': 'en',
-    'DEL_UM_ADD_A': 'a',
-    'DEL_E': '',
-    'DEL_A_ADD_EN': 'en',
-    'ADD_E': 'e',
-    'UMLAUT_ADD_E': 'e',
-    'DEL_ON_ADD_EN': 'en',
-    'ADD_ES': 'es',
-    'UMLAUT_ADD_ER': 'er',
-    'DEL_EN': '',
-    'DEL_ON_ADD_A': 'a',
-    'ADD_ER': 'er',
-    'ADD_IEN': 'ien',
-    'DEL_E_ADD_I': 'i',
-}
+
+# FUGENELEMENTE_grouped = {
+#     '': ('NULL', 'DEL_E', 'DEL_EN'),
+#     's': ('NULL', 'ADD_S', 'ADD_ES'),
+#     'n': ('NULL', 'ADD_N'), # must ensure that it isn't en, nen, or ien
+#     'en': ('NULL', 'ADD_N' 'ADD_EN', 'DEL_US_ADD_EN', 'DEL_UM_ADD_EN', 'DEL_ON_ADD_EN', 'DEL_A_ADD_EN')
+# }
 
 def load_stuff():
     nlp = spacy.load('de_core_news_md')

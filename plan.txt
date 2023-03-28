@@ -9,9 +9,16 @@ count the number of splits for each word
 
 extract the compounds (we're considering GCWs to be the words with #splits > 0)
 
-pull out named entities (when to perform this step?)
+definitely should have filtered out the data before decmpounding but here's order of ops i've used:
+    (done) pull out "words" w spaces
+    (done) lemmatize
+    pull out numbers
+    pull out named entities (when to perform this step?)
+
 
 determine Fugenelement
+    thoughts:
+        comparing to lemma alone won't work
 
 count em sort em
 

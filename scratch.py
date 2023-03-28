@@ -1,6 +1,13 @@
-import pickle
+from unfuge import operations
 
-ycs = pickle.load(open('dumps/1998ycs', 'rb'))
+s = 'bobb'
+b = 'bill'
 
-for yc in ycs[-50:]:
-    print(yc.text)
+print(operations['DEL_E'](b))
+print(operations['DEL_E'](s))
+
+a = 'happen'
+c = 'enstance'
+
+print(operations['ADD_EN'](a))
+print(operations['ADD_EN'](c))

@@ -108,32 +108,66 @@
 
 # _________________________________________________________
 
-import pickle
-ycs = pickle.load(open('dumps/1995ycs', 'rb'))
+# import pickle
+# ycs = pickle.load(open('dumps/1995ycs', 'rb'))
 
-from flair.nn import Classifier
-from flair.data import Sentence as FlairSentence
+# from flair.nn import Classifier
+# from flair.data import Sentence as FlairSentence
 
-tagger = Classifier.load('flair/ner-multi-fast')
+# tagger = Classifier.load('flair/ner-multi-fast')
 
-import datetime
+# import datetime
 
-predictions = []
+# predictions = []
 
-def is_not_name(yc):
-    token = FlairSentence(yc.text)
-    tagger.predict(token)
-    return len(token.labels) > 0
+# def is_not_name(yc):
+#     token = FlairSentence(yc.text)
+#     tagger.predict(token)
+#     return len(token.labels) > 0
 
-filtered = filter(is_not_name, ycs)
+# filtered = filter(is_not_name, ycs)
 
-# benchmark for proof
-prevtime = datetime.datetime.now()
-for f in filtered:
-    time = datetime.datetime.now()
-    elapsed = time - prevtime
-    prevtime = time
-    print(elapsed)
+# # benchmark for proof
+# prevtime = datetime.datetime.now()
+# for f in filtered:
+#     time = datetime.datetime.now()
+#     elapsed = time - prevtime
+#     prevtime = time
+#     print(elapsed)
 
-outfile = open('dumps/1995ycs_ner_filtered', 'wb')
-pickle.dump(list(filtered), outfile)
+# outfile = open('dumps/1995ycs_ner_filtered', 'wb')
+# pickle.dump(list(filtered), outfile)
+
+# _________________________________________________________
+
+from unfuge import operations
+import dill as pickle
+from tabulate import tabulate
+
+ycs = pickle.load(open('dumps/numbers_filtered/2000ycs', 'rb'))
+
+subset = ycs[::20000]
+
+heads_only = []
+heads_only_lemmatized = []
+
+for yc in subset:
+    for split in yc.splits[:-1]:
+        heads_only.append(split)
+    for lemma in yc.lemmas[:-1]:
+        heads_only_lemmatized.append(lemma)
+
+def extract(s, s_lemmatized):
+    l = []
+    l_lemmatized = []
+    table = [operations.keys()]
+    for key, value in operations.items():
+        l.append(value(s))
+        l_lemmatized.append(value(s_lemmatized))
+    table.append(l)
+    table.append(l_lemmatized)
+    return table
+
+for i in range(len(heads_only)):
+    table = extract(heads_only[i], heads_only_lemmatized[i])
+    print(tabulate(table))

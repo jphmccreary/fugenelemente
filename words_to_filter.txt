@@ -1,4 +1,4 @@
 named entities
 numbers
-spaces??
-English
+spaces?? (yes)
+English? (probably not)
