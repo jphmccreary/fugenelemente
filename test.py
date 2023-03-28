@@ -138,36 +138,92 @@
 # outfile = open('dumps/1995ycs_ner_filtered', 'wb')
 # pickle.dump(list(filtered), outfile)
 
+
 # _________________________________________________________
 
+# import pickle
+# import spacy
+
+# # ycs = pickle.load(open('dumps/2000ycs', 'rb'))
+
+# # for i in range(100000, 200000)[::500]:
+# #     print('\t\t'.join((ycs[i].text, ycs[i].splits[0])))
+
+# words_to_try = ['Bundes',
+#                 'Aushilfs',
+#                 'Bevolkerungs',
+#                 'Bühnen',
+#                 'Bildungs',
+#                 'Boxen',
+#                 'Buchen',
+#                 'Cervantes',
+#                 'Ausschuss',
+#                 'Abwasser',
+#                 'verdienen',
+#                 'systemen',
+#                 'hochburg',
+#                 'Wachtums',
+#                 'Zinssignale',
+#                 'Zins',
+#                 'Devisen',
+#                 'Howaldts',
+#                 'machst',
+#                 'trockener',
+#                 'trocken',
+#                 'trockens']
+
+# nlp = spacy.load('de_core_news_md')
+
+# for word in words_to_try:
+#     doc = nlp(word)
+#     for token in doc:
+#         print(word + ' ' + str(token.lemma_))
+
+# _________________________________________________________
+
+# from unfuge import operations
+# import dill as pickle
+# from tabulate import tabulate
+
+# ycs = pickle.load(open('dumps/numbers_filtered/2000ycs', 'rb'))
+
+# subset = ycs[::20000]
+
+# heads_only = []
+# heads_only_lemmatized = []
+
+# for yc in subset:
+#     for split in yc.splits[:-1]:
+#         heads_only.append(split)
+#     for lemma in yc.lemmas[:-1]:
+#         heads_only_lemmatized.append(lemma)
+
+# def extract(s, s_lemmatized):
+#     l = []
+#     l_lemmatized = []
+#     table = [operations.keys()]
+#     for key, value in operations.items():
+#         l.append(value(s))
+#         l_lemmatized.append(value(s_lemmatized))
+#     table.append(l)
+#     table.append(l_lemmatized)
+#     return table
+
+# for i in range(len(heads_only)):
+#     table = extract(heads_only[i], heads_only_lemmatized[i])
+#     print(tabulate(table))
+
+# _________________________________________________________
 from unfuge import operations
-import dill as pickle
-from tabulate import tabulate
 
-ycs = pickle.load(open('dumps/numbers_filtered/2000ycs', 'rb'))
+s = 'bobb'
+b = 'bill'
 
-subset = ycs[::20000]
+print(operations['DEL_E'](b))
+print(operations['DEL_E'](s))
 
-heads_only = []
-heads_only_lemmatized = []
+a = 'happen'
+c = 'enstance'
 
-for yc in subset:
-    for split in yc.splits[:-1]:
-        heads_only.append(split)
-    for lemma in yc.lemmas[:-1]:
-        heads_only_lemmatized.append(lemma)
-
-def extract(s, s_lemmatized):
-    l = []
-    l_lemmatized = []
-    table = [operations.keys()]
-    for key, value in operations.items():
-        l.append(value(s))
-        l_lemmatized.append(value(s_lemmatized))
-    table.append(l)
-    table.append(l_lemmatized)
-    return table
-
-for i in range(len(heads_only)):
-    table = extract(heads_only[i], heads_only_lemmatized[i])
-    print(tabulate(table))
+print(operations['ADD_EN'](a))
+print(operations['ADD_EN'](c))

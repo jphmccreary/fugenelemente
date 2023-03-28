@@ -36,44 +36,44 @@ def deumlaut(s: str) -> tuple:
 
 def umlaut_add_e(s):
     if not s[-1] == 'e':
-        return s
-    return deumlaut(s[:-1])[0]
+        return s, False
+    return deumlaut(s[:-1])
 
 def umlaut_add_er(s):
     if not s[-2:] == 'er':
-        return s
-    return deumlaut(s[:-2])[0]
+        return s, False
+    return deumlaut(s[:-2])
 
 # (Länger, 1998)
 operations = {
-    'NULL': lambda x: x,
-    'DEL_E': lambda x: x + 'e',
-    'DEL_EN': lambda x: x + 'en',
+    'NULL': lambda x: (x, True),
+    'DEL_E': lambda x: (x + 'e', True),
+    'DEL_EN': lambda x: (x + 'en', True),
 
-    'ADD_S': lambda x: x if not x[-1] == 's' else x[:-1],
+    'ADD_S': lambda x: (x, False) if not x[-1] == 's' else (x[:-1], True),
 
-    'ADD_N': lambda x: x if not x[-1] == 'n' else x[:-1],
+    'ADD_N': lambda x: (x, False) if not x[-1] == 'n' else (x[:-1], True),
 
-    'ADD_EN': lambda x: x if not x[-2:] == 'en' else x[:-2],
-    'DEL_US_ADD_EN': lambda x: x if not x[-2:] == 'en' else x[:-2] + 'us',
-    'DEL_UM_ADD_EN': lambda x: x if not x[-2:] == 'en' else x[:-2] + 'um',
-    'DEL_ON_ADD_EN': lambda x: x if not x[-2:] == 'en' else x[:-2] + 'on',
-    'DEL_A_ADD_EN': lambda x: x if not x[-2:] == 'en' else x[:-2] + 'a',
+    'ADD_EN': lambda x: (x, False) if not x[-2:] == 'en' else (x[:-2], True),
+    'DEL_US_ADD_EN': lambda x: (x, False) if not x[-2:] == 'en' else (x[:-2] + 'us', True),
+    'DEL_UM_ADD_EN': lambda x: (x, False) if not x[-2:] == 'en' else (x[:-2] + 'um', True),
+    'DEL_ON_ADD_EN': lambda x: (x, False) if not x[-2:] == 'en' else (x[:-2] + 'on', True),
+    'DEL_A_ADD_EN': lambda x: (x, False) if not x[-2:] == 'en' else (x[:-2] + 'a', True),
 
-    'ADD_NEN': lambda x: x if not x[-3:] == 'nen' else x[:-3],
+    'ADD_NEN': lambda x: (x, False) if not x[-3:] == 'nen' else (x[:-3], True),
 
-    'DEL_UM_ADD_A': lambda x: x if not x[-1] == 'a' else x[:-1] + 'um',
-    'DEL_ON_ADD_A': lambda x: x if not x[-1] == 'a' else x[:-1] + 'on',
+    'DEL_UM_ADD_A': lambda x: (x, False) if not x[-1] == 'a' else (x[:-1] + 'um', True),
+    'DEL_ON_ADD_A': lambda x: (x, False) if not x[-1] == 'a' else (x[:-1] + 'on', True),
 
-    'ADD_E': lambda x: x if not x[-1] == 'e' else x[:-1],
+    'ADD_E': lambda x: (x, False) if not x[-1] == 'e' else (x[:-1], True),
     'UMLAUT_ADD_E': umlaut_add_e,
 
-    'ADD_ES': lambda x: x if not x[-2:] == 'es' else x[:-2],
+    'ADD_ES': lambda x: (x, False) if not x[-2:] == 'es' else (x[:-2], True),
 
     'UMLAUT_ADD_ER': umlaut_add_er,
-    'ADD_ER': lambda x: x if not x[-2:] == 'er' else x[:-2],
+    'ADD_ER': lambda x: (x, False) if not x[-2:] == 'er' else (x[:-2], True),
 
-    'ADD_IEN': lambda x: x if not x[-3:] == 'ien' else x[:-3],
+    'ADD_IEN': lambda x: (x, False) if not x[-3:] == 'ien' else (x[:-3], True),
 
-    'DEL_E_ADD_I': lambda x: x if not x[-1] == 'i' else x[:-1] + 'e',
+    'DEL_E_ADD_I': lambda x: (x, False) if not x[-1] == 'i' else (x[:-1] + 'e', True),
 }

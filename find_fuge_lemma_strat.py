@@ -1,27 +1,34 @@
-import spacy
 import dill as pickle
-import datetime
-from unfuge import operations
+from datetime import datetime
+import os
 
+print(f'pid: {os.getpid()}')
 
-# FUGENELEMENTE_grouped = {
-#     '': ('NULL', 'DEL_E', 'DEL_EN'),
-#     's': ('NULL', 'ADD_S', 'ADD_ES'),
-#     'n': ('NULL', 'ADD_N'), # must ensure that it isn't en, nen, or ien
-#     'en': ('NULL', 'ADD_N' 'ADD_EN', 'DEL_US_ADD_EN', 'DEL_UM_ADD_EN', 'DEL_ON_ADD_EN', 'DEL_A_ADD_EN')
-# }
+def load_year(year):
+    t1 = datetime.now()
+    ycs = pickle.load(open(f'dumps/unfuge_candidates_added/{year}ycs', 'rb'))
+    t2 = datetime.now()
+    elapsed = t2 - t1
+    print(f'time to load {year}: {elapsed}')
+    return ycs
 
-def load_stuff():
-    nlp = spacy.load('de_core_news_md')
-    ycs = pickle.load(open('dumps/1995ycs', 'rb'))
-    return nlp, ycs
+years = {}
 
-t1 = datetime.datetime.now()
-nlp, ycs = load_stuff()
-t2 = datetime.datetime.now()
-elapsed = t2 - t1
-print('time to load: ' + str(elapsed))
+for year in range(1995, 2000):
+    print(f'counting year: {year}')
+    years[year] = {}
+    ycs = load_year(year)
 
-def find_fuge(splits: tuple) -> tuple:
-    fugen = []
-    return tuple(fugen)
+    for yc in ycs:
+        matches = yc.lemma_matches
+        for match in matches:
+            for key in match.keys():
+                if key not in years[year].keys():
+                    years[year][key] = 0
+                years[year][key] += 1
+
+for year, matchdict in years.items():
+    print(f'results for year: {year}')
+    for key, count in matchdict.items():
+        print(f'{key}: {count}')
+    print('\n')
