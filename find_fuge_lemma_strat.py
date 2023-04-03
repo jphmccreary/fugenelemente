@@ -13,8 +13,8 @@ FUGENELEMENTE_FREQUENCY_ORDER = (
     'ADD_N',            # 11.4%
     'ADD_EN',           # 9.2%
     'ADD_NEN',          # 5.6%
-    'DEL_US_ADD_EN',
-    'DEL_UM_ADD_EN',
+    'DEL_US_ADD_EN',    # 1.3%
+    'DEL_UM_ADD_EN',    # 0.7%
     'DEL_UM_ADD_A',
     'DEL_E',
     'DEL_A_ADD_EN',
