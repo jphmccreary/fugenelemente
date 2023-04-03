@@ -32,7 +32,6 @@ class YearedCompound:
         self.fuge_candidates = tuple(fuge_candidates_l)
         self.lemma_matches = tuple(lemma_matches_l)
 
-
 def load_year(year):
     t1 = datetime.now()
     ycs = pickle.load(open(f'dumps/numbers_filtered/{year}ycs', 'rb'))
@@ -41,7 +40,7 @@ def load_year(year):
     print(f'time to load {year}: {elapsed}')
     return ycs
 
-for year in range(2001, 2023):
+for year in range(1995, 2023):
     old_ycs = load_year(year)
     ycs = []
 
@@ -51,4 +50,7 @@ for year in range(2001, 2023):
     t2 = datetime.now()
     print(f'time to add candidates: {t2 - t1}')
 
+    t1 = datetime.now()
     pickle.dump(tuple(ycs), open(f'dumps/unfuge_candidates_added/{year}ycs', 'wb'))
+    t2 = datetime.now()
+    print(f'time to write file: {t2 - t1}')

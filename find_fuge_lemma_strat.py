@@ -5,13 +5,14 @@ import os
 print(f'pid: {os.getpid()}')
 
 # (Länger, 1998)
+# out of 46700 total
 # these are also the keys for the dicts that reference them
 FUGENELEMENTE_FREQUENCY_ORDER = (
-    'NULL',
-    'ADD_S',
-    'ADD_N',
-    'ADD_EN',
-    'ADD_NEN',
+    'NULL',             # 48.7%
+    'ADD_S',            # 20.6%
+    'ADD_N',            # 11.4%
+    'ADD_EN',           # 9.2%
+    'ADD_NEN',          # 5.6%
     'DEL_US_ADD_EN',
     'DEL_UM_ADD_EN',
     'DEL_UM_ADD_A',
