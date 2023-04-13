@@ -5,7 +5,7 @@ import os
 
 print('pid: ' + str(os.getpid()))
 
-for year in range(2002, 2023):
+for year in range(1995, 2023):
     starttime = datetime.datetime.now()
     print('beginning ' + str(year) + ' at time: ' + str(starttime))
 

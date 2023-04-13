@@ -1,0 +1,18 @@
+words ending with - were filtered out
+    in many cases this eliminates single words split across two lines that were parsed as two words
+    however, it also eliminates a certain type of construction, wherein "modifiers" ending with - but separated by spaces are stacked ie
+        french- mime-pathogen- experts
+
+NER may remove reasonable compounds such as Turingmaschine and Zürichstadt
+
+(if i decide to go this route)
+for the sake of accuracy, only binary compounds tagged as nouns are considered. decompounders tend to perform better on these
+this leaves out accounting for the possibility that ternary+ compounds may have a differend Fn distribution
+
+(if this is true)
+Not using rules-based splitter because it relies on a dictionary?? (not totally sure about this)
+in which case it would miss lots of words, probably novel words, which this study is interested in
+
+(if i don't do something about this)
+hyphen-compounds are not considered.
+    it may justifiable to consider this a fugenelement

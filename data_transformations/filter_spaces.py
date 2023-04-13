@@ -18,4 +18,3 @@ for year in range(1995, 2023):
     filtered = filter(has_no_spaces, ycs)
     outfile = open(f'dumps/spaces_filtered/{year}ycs', 'wb')
     pickle.dump(tuple(filtered), outfile)
-

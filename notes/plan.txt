@@ -9,17 +9,9 @@ count the number of splits for each word
 
 extract the compounds (we're considering GCWs to be the words with #splits > 0)
 
-definitely should have filtered out the data before decmpounding but here's order of ops i've used:
-    (done) decompound
-    (done) pull out "words" w spaces
-    (done) lemmatize
-    (done) pull out numbers
-    (done) unfuge candidates added
-    use only modifier+head pairs? len(splits) == 2
-    use only words with at least one coocurrence? count > 1
-    pull out named entities (when to perform this step?) - this could perhaps be nullified if we only use defuged modifiers that exist as a lemma in the vocabulary
-
-
+a sequence of data transformations are applied,
+and the data is dumped in a series of yeared folders for each step in the process
+    @ data_transformations/order.txt
 
 determine Fugenelement
     thoughts:
@@ -31,3 +23,8 @@ analyze em
 
 Question: how does using only 1 year of data in the DT (1M words as opposed to SECOS's 70M affect splitting performance metrics?)
     for now this will go unanswered as I have resigned to using the provided DT
+
+Additional analysis:
+    DO THIS: analyze subset where number of cooccurences of a word <1000
+    counting frequency of certain words
+    counting Fn that cooresponds to pluralization of modifiers as a single group

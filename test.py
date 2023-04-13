@@ -231,37 +231,80 @@
 
 # _________________________________________________________
 
-import dill as pickle
-from datetime import datetime
-import os
+# import dill as pickle
+# from datetime import datetime
+# import os
 
-print(f'pid: {os.getpid()}')
+# print(f'pid: {os.getpid()}')
 
-def load_year(year):
-    t1 = datetime.now()
-    ycs = pickle.load(open(f'dumps/unfuge_candidates_added/{year}ycs', 'rb'))
-    t2 = datetime.now()
-    elapsed = t2 - t1
-    print(f'time to load {year}: {elapsed}')
-    return ycs
+# def load_year(year):
+#     t1 = datetime.now()
+#     ycs = pickle.load(open(f'dumps/unfuge_candidates_added/{year}ycs', 'rb'))
+#     t2 = datetime.now()
+#     elapsed = t2 - t1
+#     print(f'time to load {year}: {elapsed}')
+#     return ycs
 
-years = {}
+# years = {}
 
-for year in range(1995, 2000):
-    print(f'counting year: {year}')
-    years[year] = {}
-    ycs = load_year(year)
+# for year in range(1995, 2000):
+#     print(f'counting year: {year}')
+#     years[year] = {}
+#     ycs = load_year(year)
 
-    for yc in ycs:
-        matches = yc.lemma_matches
-        for match in matches:
-            for key in match.keys():
-                if key not in years[year].keys():
-                    years[year][key] = 0
-                years[year][key] += 1
+#     for yc in ycs:
+#         matches = yc.lemma_matches
+#         for match in matches:
+#             for key in match.keys():
+#                 if key not in years[year].keys():
+#                     years[year][key] = 0
+#                 years[year][key] += 1
 
-for year, matchdict in years.items():
-    print(f'results for year: {year}')
-    for key, count in matchdict.items():
-        print(f'{key}: {count}')
-    print('\n')
+# for year, matchdict in years.items():
+#     print(f'results for year: {year}')
+#     for key, count in matchdict.items():
+#         print(f'{key}: {count}')
+#     print('\n')
+
+# _________________________________________________________
+
+import requests
+
+request_prefix = "http://localhost:2020?sentence="
+
+class YearedCompound:
+    """
+    Stores relevant data for a compound from the corpus inc:
+    year, number of occurances, corpus, type of corpus (eg news, website, ...?),
+    splits, Fugenelement(e?)
+    """
+    def __init__(self, text, year, count, corpus, source) -> None:
+        # CHOP IT UP
+        response = requests.get(request_prefix + text)
+        response.encoding = 'UTF-8'
+        self.splits = response.text.split()
+        if len(self.splits) < 2:
+            self.is_compound = False
+            return
+        else:
+            self.is_compound = True
+
+        self.text = text
+        self.year = year
+        self.count = count
+        self.corpus = corpus
+        self.source = source
+
+        pass # we will do determination of fugenelemente right here
+
+    def __str__(self):
+        return '\n'.join([
+            'word:\t\t' + self.text,
+            'year:\t\t' + str(self.year),
+            'count:\t\t' + str(self.count),
+            'corpus:\t\t' + self.corpus,
+            'source:\t\t' + self.source,
+            'splits:\t\t' + ' '.join(self.splits)
+        ])
+
+

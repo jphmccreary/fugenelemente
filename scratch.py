@@ -1,11 +1,18 @@
 import dill as pickle
 
-ycs = pickle.load(open('dumps/unfuge_candidates_added/2022ycs', 'rb'))
+ycs = pickle.load(open('dumps/reshaped/1995ycs', 'rb'))
 
-# for yc in ycs[20000:30000:1000]:
-#     print(f'{yc.text} {yc.count}')
+pass
 
-for yc in ycs:
-    if yc.text == 'Studienjahr':
-        print(f'{yc.fuge_candidates}\n{yc.lemma_matches}')
-        break
+# shape = {
+#     'corpus': str, # going to make these an int based on CORPUS_ID_MAP
+#     'count': str, #? is it? it has apostrophes in the debugger. maybe should be an int
+#     'fuge_candidates': tuple, # tuple(dict(str:str))
+#     'is_compound': bool,
+#     'lemma_matches': (dict), # tuple(dict(str:str))
+#     'lemmas': (str), # tuple(str)
+#     'source': str, # going to make these an int based on SOURCE_TYPE_MAP
+#     'splits': [str], # list(str)
+#     'text': str, #going to also make this the key for the dict that stores them,
+#     'year': str,
+# }
