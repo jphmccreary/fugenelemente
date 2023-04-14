@@ -6,6 +6,9 @@ definitely should have filtered out the data before decmpounding but here's orde
     (done) unfuge candidates added
     (done) reshape
         this step pulls out unused data fields and stores ycs in a dict hashed by base word text
-    use only modifier+head pairs? len(splits) == 2
-    use only words with at least one coocurrence? count > 1
+    (done) use only modifier+head pairs? len(splits) == 2
+        reduced total size of dumps by ~400MB (1.8GB -> 1.44GB)
+    (done) use only words with at least one coocurrence? count > 1
+        reduced total size of dumps by ~1GB! (1.44GB -> 477MB)
+    ?use only words that can be a noun?
     pull out named entities (when to perform this step?) - this could perhaps be nullified if we only use defuged modifiers that exist as a lemma in the vocabulary

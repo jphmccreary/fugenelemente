@@ -1,5 +1,5 @@
 import spacy
-from whitespace_tokenizer import WhitespaceTokenizer
+from space_tokenizer import WhitespaceTokenizer
 import dill as pickle
 import datetime
 import os
