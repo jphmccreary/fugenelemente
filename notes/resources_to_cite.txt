@@ -11,3 +11,7 @@ flair used for NER
 Riedl&Biemann for SECOS
 
 Projekt Deutscher Wortschatz
+
+
+lemmatization list ?
+    https://github.com/michmech/lemmatization-lists

@@ -1,19 +1,38 @@
-from dataclasses import dataclass
+import dill as pickle
 
-@dataclass
-class Test:
-    a: int
+ycs0 = pickle.load(open('dumps/lemma_lookup_trial/1995ycs', 'rb'))
+ycs1 = pickle.load(open('dumps/lemma_lookup_trial/2022ycs', 'rb'))
 
-d = {
-    0: Test(1)
-}
+count0 = 0
+count1 = 0
 
-d[0].animal = 'dog'
-m = d[0]
-m.color = 'brown'
+types0 = {}
+types1 = {}
+changes = []
 
-print(d[0].animal)
-print(m.animal)
+for text, yc in ycs0.items():
+    count0 += yc.count
+    if yc.chosen_fn == 'DEL_E_ADD_I':
+        types0[text] = yc.count
 
-print(d[0].color)
-print(m.color)
+for text, yc in ycs1.items():
+    count1 += yc.count
+    if yc.chosen_fn == 'DEL_E_ADD_I':
+        types1[text] = yc.count
+
+for t in types0:
+    if t not in types1:
+        types1[t] = 0
+
+for t in types1:
+    if t not in types0:
+        types0[t] = 0
+
+all_types = set.union(set(types0.keys()), set(types1.keys()))
+
+for t in all_types:
+    changes.append((t, types1[t] - types0[t]))
+
+sorted_changes = sorted(changes, key=lambda x: x[1], reverse=False)
+
+print(sorted_changes[:50])

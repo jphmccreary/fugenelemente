@@ -32,3 +32,57 @@ SOURCE_TYPE_MAP = {
 CORPUS_ID_MAP = {
     0: 'PDW'
 }
+
+INVALID_CHARS = {'…', '\xad', '\u200b', '\x80', '%', '”', ';', '^', '`', '/', '‚', '>', '~', '–', '•', '\x10', '�', '"', ')', '‹', '´', '“', '@', '+', '’', '°', '®', '!', '(', '?', '₂', '#', '\\', 'ł', '\x96', '\x92', '·', '{', '|', '\ufeff', '\x84', '„', '$', '‑', '¼', '=', '.', '\uf003', '™', '³', '\x94', ']', ',', '[', '‐', '*', '›', '‘', '<', '̈', "'", '&', '«', '-', '}', '»', '²', '\x93', '_', ':'}
+
+PREPOSITIONS = {
+    # AKKUSATIV
+    'bis',
+    'durch', 'durchs',
+    'für', 'fürs', 'fuer', 'fuers'
+    'gegen',
+    'ohne',
+    'um',
+    'wider',
+    # AKKUSATIV UND SELTEN
+    'betreffend',
+    # DATIV
+    'aus',
+    'außer', 'ausser',
+    'bei', 'beim',
+    'mit',
+    'nach',
+    'seit',
+    'von', 'vom'
+    'zu',
+    # DATIV UND SELTEN
+    'ab',
+    'entgegen',
+    'entsprechend',
+    'gegenüber', 'gegenueber'
+    'gemäß', 'gemäss' 'gemaeß', 'gemaess'
+    'samt', 'mitsamt',
+    'nahe',
+    # WECHSELPRÄPOSITIONEN
+    'an', 'ans', 'am',
+    'auf', 'aufs',
+    'hinter', 'hinters', 'hinterm',
+    'in', 'ins', 'im',
+    'neben',
+    'über', 'übers', 'überm', 'ueber', 'uebers', 'ueberm',
+    'unter', 'unters', 'unterm'
+    'vor', 'vors', 'vorm',
+    'zwischen',
+    # GENITIV GESCHRIEBEN, DATIV GESPROCHEN
+    'anstatt', 'statt',
+    'trotz',
+    'während', 'waehrend',
+    'wegen',
+    # IMMER GENITIV
+    'außerhalb', 'innerhalb', 'oberhalb', 'unterhalb', 'ausserhalb',
+    'diesseits', 'jenseits', 'beiderseits',
+    # WECHSELPRÄPOSITION AM ENDE, GENITIV AM ANFANG
+    'entlang',
+    # !GIBTS MEHR GENITIV, ABER SIE SIND SEHR SELTEN
+
+}

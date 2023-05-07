@@ -268,43 +268,65 @@
 
 # _________________________________________________________
 
-import requests
+# import requests
 
-request_prefix = "http://localhost:2020?sentence="
+# request_prefix = "http://localhost:2020?sentence="
 
-class YearedCompound:
-    """
-    Stores relevant data for a compound from the corpus inc:
-    year, number of occurances, corpus, type of corpus (eg news, website, ...?),
-    splits, Fugenelement(e?)
-    """
-    def __init__(self, text, year, count, corpus, source) -> None:
-        # CHOP IT UP
-        response = requests.get(request_prefix + text)
-        response.encoding = 'UTF-8'
-        self.splits = response.text.split()
-        if len(self.splits) < 2:
-            self.is_compound = False
-            return
-        else:
-            self.is_compound = True
+# class YearedCompound:
+#     """
+#     Stores relevant data for a compound from the corpus inc:
+#     year, number of occurances, corpus, type of corpus (eg news, website, ...?),
+#     splits, Fugenelement(e?)
+#     """
+#     def __init__(self, text, year, count, corpus, source) -> None:
+#         # CHOP IT UP
+#         response = requests.get(request_prefix + text)
+#         response.encoding = 'UTF-8'
+#         self.splits = response.text.split()
+#         if len(self.splits) < 2:
+#             self.is_compound = False
+#             return
+#         else:
+#             self.is_compound = True
 
-        self.text = text
-        self.year = year
-        self.count = count
-        self.corpus = corpus
-        self.source = source
+#         self.text = text
+#         self.year = year
+#         self.count = count
+#         self.corpus = corpus
+#         self.source = source
 
-        pass # we will do determination of fugenelemente right here
+#         pass # we will do determination of fugenelemente right here
 
-    def __str__(self):
-        return '\n'.join([
-            'word:\t\t' + self.text,
-            'year:\t\t' + str(self.year),
-            'count:\t\t' + str(self.count),
-            'corpus:\t\t' + self.corpus,
-            'source:\t\t' + self.source,
-            'splits:\t\t' + ' '.join(self.splits)
-        ])
+#     def __str__(self):
+#         return '\n'.join([
+#             'word:\t\t' + self.text,
+#             'year:\t\t' + str(self.year),
+#             'count:\t\t' + str(self.count),
+#             'corpus:\t\t' + self.corpus,
+#             'source:\t\t' + self.source,
+#             'splits:\t\t' + ' '.join(self.splits)
+#         ])
 
 
+# _________________________________________________________
+
+import dill as pickle
+import re
+
+matcher = re.compile(r'.*[aeiouöüä]+r?ch$')
+
+nah_words = {'fach', 'durch', 'bruch', 'nach', 'rauch', 'gleich', 'hoch', 'buch', 'stich', 'reich', 'sprech', 'lich', 'flach', 'schlauch', 'hauch', 'schwach', 'wach', 'hauch', 'dach'}
+def no_nahs(s):
+    for w in nah_words:
+        if s[-len(w):].lower() == w:
+            return False
+    return True
+
+for year in range(1995, 2023):
+    ycs = pickle.load(open(f'dumps/named_ents_filtered/{year}ycs', 'rb'))
+
+    for text, yc in ycs.items():
+        s = yc.splits[0].lower()
+
+        if no_nahs(s) and matcher.match(s):
+            pass

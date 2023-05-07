@@ -8,3 +8,4 @@ __pycache__/
 dumps*
 SECOS/
 german.model
+temp/

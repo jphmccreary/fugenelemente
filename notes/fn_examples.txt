@@ -1,0 +1,4 @@
+DEL_E
+    Sachschaden = Sache + schaden
+    Kirchturm = Kirche + turm (steeple)
+    Sprachregelung = Sprache + regelung (language rules)

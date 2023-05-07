@@ -34,7 +34,7 @@ for year in range(1995, 2023):
 #     print('\n')
 
 # add the top row
-table = [['']]
+table = [['year']]
 for op in FUGENELEMENTE_FREQUENCY_ORDER:
     table[0].append(op)
 

@@ -10,5 +10,11 @@ definitely should have filtered out the data before decmpounding but here's orde
         reduced total size of dumps by ~400MB (1.8GB -> 1.44GB)
     (done) use only words with at least one coocurrence? count > 1
         reduced total size of dumps by ~1GB! (1.44GB -> 477MB)
+    (done) mark named entities
+        NOTE: dash-compounds were not marked bc spacy tokenized them apart. this is ok because we already know what links them
+    (done) remove invalid chars
+    (done) filter named entities
+    (in progress) lemma lookup and fn selection
+        currently stored in dumps/lemma_lookup_trial
     ?use only words that can be a noun?
     pull out named entities (when to perform this step?) - this could perhaps be nullified if we only use defuged modifiers that exist as a lemma in the vocabulary
